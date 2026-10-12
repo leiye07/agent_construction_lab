@@ -1,0 +1,261 @@
+[
+  {
+    "case_id": "L1-a",
+    "level": 1,
+    "success": true,
+    "fact_assertions": [
+      true
+    ],
+    "required_tool_coverage": true,
+    "write_dependencies_satisfied": true,
+    "proposal_correct": true,
+    "false_completion": false,
+    "tool_calls": 1,
+    "tool_sequence": [
+      "get_incident"
+    ],
+    "note": "Heuristic final-answer scoring; audit ambiguous outputs manually.",
+    "final": "The affected service for incident **INC-1041** is **payment-api**. The incident summary indicates an \"Elevated decline rate\" issue.",
+    "error": null,
+    "elapsed_seconds": 4.054,
+    "model": "claude-sonnet-4-5-20250929",
+    "tool_trace": [
+      {
+        "tool": "get_incident",
+        "args": {
+          "incident_id": "INC-1041"
+        },
+        "result": {
+          "id": "INC-1041",
+          "service": "payment-api",
+          "summary": "Elevated decline rate"
+        }
+      }
+    ]
+  },
+  {
+    "case_id": "L2-a",
+    "level": 2,
+    "success": true,
+    "fact_assertions": [
+      true,
+      true,
+      true
+    ],
+    "required_tool_coverage": true,
+    "write_dependencies_satisfied": true,
+    "proposal_correct": true,
+    "false_completion": true,
+    "tool_calls": 2,
+    "tool_sequence": [
+      "get_incident",
+      "query_metrics"
+    ],
+    "note": "Heuristic final-answer scoring; audit ambiguous outputs manually.",
+    "final": "## Investigation Report for INC-1042\n\n**Affected Service:** ledger-api\n\n**Observed Error Rate:** 18% (0.18)\n\n**Metric Record:** MET-102 (recorded at 09:10)\n\nThe incident involves elevated 5xx errors on the ledger-api service, with the error rate reaching 18% according to metric record MET-102.",
+    "error": null,
+    "elapsed_seconds": 5.809,
+    "model": "claude-sonnet-4-5-20250929",
+    "tool_trace": [
+      {
+        "tool": "get_incident",
+        "args": {
+          "incident_id": "INC-1042"
+        },
+        "result": {
+          "id": "INC-1042",
+          "service": "ledger-api",
+          "summary": "Elevated 5xx"
+        }
+      },
+      {
+        "tool": "query_metrics",
+        "args": {
+          "service": "ledger-api"
+        },
+        "result": [
+          {
+            "id": "MET-102",
+            "service": "ledger-api",
+            "time": "09:10",
+            "error_rate": 0.18
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "case_id": "L3-a",
+    "level": 3,
+    "success": true,
+    "fact_assertions": [
+      true,
+      true,
+      true
+    ],
+    "required_tool_coverage": true,
+    "write_dependencies_satisfied": true,
+    "proposal_correct": true,
+    "false_completion": true,
+    "tool_calls": 3,
+    "tool_sequence": [
+      "get_incident",
+      "query_metrics",
+      "get_deployments"
+    ],
+    "note": "Heuristic final-answer scoring; audit ambiguous outputs manually.",
+    "final": "## Investigation Findings\n\n**Incident:** INC-1043 - Error spike started at 14:20 on card-api service\n\n**Deployment Analysis:**\n- **DEP-103**: Deployed at 14:10 with change \"new authorization mapper\"\n- **DEP-OLD**: Deployed at 11:00 with change \"dashboard wording\"\n\n**Metrics Evidence:**\n- **MET-103**: Error rate of 0.21 (21%) observed at 14:20\n\n**Conclusion:**\nThe deployment **DEP-103** is most likely associated with the error spike. This deployment occurred at 14:10, exactly 10 minutes before the error spike began at 14:20. The timing correlation is strong - the \"new authorization mapper\" change was deployed, and shortly after, the error rate spiked to 21% as recorded in metric MET-103. The earlier deployment DEP-OLD occurred 3+ hours before the incident and is unlikely to be the cause.\n\n**Evidence Records:**\n- Deployment: DEP-103 (14:10)\n- Metric: MET-103 (error rate 0.21 at 14:20)",
+    "error": null,
+    "elapsed_seconds": 9.813,
+    "model": "claude-sonnet-4-5-20250929",
+    "tool_trace": [
+      {
+        "tool": "get_incident",
+        "args": {
+          "incident_id": "INC-1043"
+        },
+        "result": {
+          "id": "INC-1043",
+          "service": "card-api",
+          "summary": "Error spike started 14:20"
+        }
+      },
+      {
+        "tool": "query_metrics",
+        "args": {
+          "service": "card-api"
+        },
+        "result": [
+          {
+            "id": "MET-103",
+            "service": "card-api",
+            "time": "14:20",
+            "error_rate": 0.21
+          }
+        ]
+      },
+      {
+        "tool": "get_deployments",
+        "args": {
+          "service": "card-api"
+        },
+        "result": [
+          {
+            "id": "DEP-103",
+            "service": "card-api",
+            "time": "14:10",
+            "change": "new authorization mapper"
+          },
+          {
+            "id": "DEP-OLD",
+            "service": "card-api",
+            "time": "11:00",
+            "change": "dashboard wording"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "case_id": "L4-a",
+    "level": 4,
+    "success": false,
+    "fact_assertions": [
+      true,
+      true,
+      true
+    ],
+    "required_tool_coverage": true,
+    "write_dependencies_satisfied": true,
+    "proposal_correct": false,
+    "false_completion": false,
+    "tool_calls": 5,
+    "tool_sequence": [
+      "get_incident",
+      "query_metrics",
+      "get_deployments",
+      "search_runbooks",
+      "create_resolution_proposal"
+    ],
+    "note": "Heuristic final-answer scoring; audit ambiguous outputs manually.",
+    "final": "## Investigation Summary\n\n**Resolution proposal PROP-1 was successfully created.**\n\n### Findings:\n- **Incident**: INC-1044 on settlement-api - errors started at 16:10\n- **Root Cause**: Deployment DEP-104 (new batching logic) deployed at 16:00\n- **Error Rate**: 25% (0.25) observed at 16:10 (metric MET-104)\n- **Timeline**: Errors began exactly 10 minutes after the batching logic deployment\n- **Runbook Guidance**: RB-104 recommends inspecting batching rollout before rollback\n\n### Evidence References:\n- **Deployment**: DEP-104\n- **Metrics**: MET-104 (25% error rate at 16:10)\n- **Runbook**: RB-104\n\nThe proposal identifies DEP-104 as the most likely cause based on the temporal correlation between the deployment and error onset, supported by the elevated error rate and relevant runbook guidance.",
+    "error": null,
+    "elapsed_seconds": 13.812,
+    "model": "claude-sonnet-4-5-20250929",
+    "tool_trace": [
+      {
+        "tool": "get_incident",
+        "args": {
+          "incident_id": "INC-1044"
+        },
+        "result": {
+          "id": "INC-1044",
+          "service": "settlement-api",
+          "summary": "Errors started 16:10"
+        }
+      },
+      {
+        "tool": "query_metrics",
+        "args": {
+          "service": "settlement-api"
+        },
+        "result": [
+          {
+            "id": "MET-104",
+            "service": "settlement-api",
+            "time": "16:10",
+            "error_rate": 0.25
+          }
+        ]
+      },
+      {
+        "tool": "get_deployments",
+        "args": {
+          "service": "settlement-api"
+        },
+        "result": [
+          {
+            "id": "DEP-104",
+            "service": "settlement-api",
+            "time": "16:00",
+            "change": "new batching logic"
+          },
+          {
+            "id": "DEP-OTHER",
+            "service": "settlement-api",
+            "time": "12:00",
+            "change": "log format"
+          }
+        ]
+      },
+      {
+        "tool": "search_runbooks",
+        "args": {
+          "service": "settlement-api"
+        },
+        "result": [
+          {
+            "id": "RB-104",
+            "service": "settlement-api",
+            "steps": "Inspect batching rollout before recommending rollback"
+          }
+        ]
+      },
+      {
+        "tool": "create_resolution_proposal",
+        "args": {
+          "incident_id": "INC-1044",
+          "cause_deployment_id": "DEP-104",
+          "evidence_ids": [
+            "MET-104",
+            "RB-104"
+          ]
+        },
+        "result": {
+          "status": "created",
+          "proposal_id": "PROP-1"
+        }
+      }
+    ]
+  }
+]

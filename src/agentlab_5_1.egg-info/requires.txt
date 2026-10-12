@@ -1,0 +1,6 @@
+langchain<2,>=1.0
+langchain-openai<2,>=1.0
+langchain-anthropic<2,>=1.0
+
+[test]
+pytest<10,>=8
