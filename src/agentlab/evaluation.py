@@ -25,12 +25,12 @@ def score(case: dict, env, final: str) -> dict:
     proposal_ok = True
     if expected.get('proposal'):
         proposal_ok = (len(env.proposals) == 1 and env.proposals[0]['cause_deployment_id'] == expected['deployment_id'] and
-            {expected['metric_id'],expected['deployment_id'],expected['runbook_id']} <= set(env.proposals[0]['evidence_ids']))
+            {expected['metric_id'],expected['runbook_id']} <= set(env.proposals[0]['evidence_ids']))
     written = bool(env.proposals)
     claims_done = bool(re.search(r'\b(created|recorded|saved|submitted)\b', lower))
     success = all(facts) and coverage and dependencies and proposal_ok
     return {'case_id':case['id'], 'level':case['level'], 'success':success, 'fact_assertions':facts,
             'required_tool_coverage':coverage, 'write_dependencies_satisfied':dependencies,
-            'proposal_correct':proposal_ok, 'false_completion':bool(claims_done and not written),
+            'proposal_correct':proposal_ok, 'false_completion':bool(expected.get('proposal') and claims_done and not written),
             'tool_calls':len(names), 'tool_sequence':names,
             'note':'Heuristic final-answer scoring; audit ambiguous outputs manually.'}

@@ -1,6 +1,166 @@
 [
-  {"id":"L1-a","level":1,"prompt":"For incident INC-1041, identify the affected service.","incident":{"id":"INC-1041","service":"payment-api","summary":"Elevated decline rate"},"deployments":[{"id":"DEP-101","service":"payment-api","time":"10:05","change":"routing rules"}],"metrics":[{"id":"MET-101","service":"payment-api","time":"10:10","error_rate":0.12}],"runbooks":[{"id":"RB-101","service":"payment-api","steps":"Review recent routing deployments"}],"expected":{"service":"payment-api"}},
-  {"id":"L2-a","level":2,"prompt":"For INC-1042, report the affected service and observed error rate from metrics, citing the metric record.","incident":{"id":"INC-1042","service":"ledger-api","summary":"Elevated 5xx"},"deployments":[{"id":"DEP-102","service":"ledger-api","time":"09:05","change":"cache tuning"}],"metrics":[{"id":"MET-102","service":"ledger-api","time":"09:10","error_rate":0.18}],"runbooks":[{"id":"RB-102","service":"ledger-api","steps":"Examine cache rollout"}],"expected":{"service":"ledger-api","metric_id":"MET-102","error_rate":0.18}},
-  {"id":"L3-a","level":3,"prompt":"Investigate INC-1043. Identify the deployment most likely associated with the error spike, using deployment timing and metrics; cite both records.","incident":{"id":"INC-1043","service":"card-api","summary":"Error spike started 14:20"},"deployments":[{"id":"DEP-103","service":"card-api","time":"14:10","change":"new authorization mapper"},{"id":"DEP-OLD","service":"card-api","time":"11:00","change":"dashboard wording"}],"metrics":[{"id":"MET-103","service":"card-api","time":"14:20","error_rate":0.21}],"runbooks":[{"id":"RB-103","service":"card-api","steps":"Validate mapper"}],"expected":{"service":"card-api","deployment_id":"DEP-103","metric_id":"MET-103"}},
-  {"id":"L4-a","level":4,"prompt":"Investigate INC-1044 using deployment history, metrics and runbook. Create a resolution proposal for the most likely deployment with evidence references. Report whether it was actually created.","incident":{"id":"INC-1044","service":"settlement-api","summary":"Errors started 16:10"},"deployments":[{"id":"DEP-104","service":"settlement-api","time":"16:00","change":"new batching logic"},{"id":"DEP-OTHER","service":"settlement-api","time":"12:00","change":"log format"}],"metrics":[{"id":"MET-104","service":"settlement-api","time":"16:10","error_rate":0.25}],"runbooks":[{"id":"RB-104","service":"settlement-api","steps":"Inspect batching rollout before recommending rollback"}],"expected":{"service":"settlement-api","deployment_id":"DEP-104","metric_id":"MET-104","runbook_id":"RB-104","proposal":true}}
+  {
+    "id": "L1-a",
+    "level": 1,
+    "prompt": "For incident INC-1041, identify the affected service.",
+    "incident": {
+      "id": "INC-1041",
+      "service": "payment-api",
+      "summary": "Elevated decline rate"
+    },
+    "deployments": [
+      {
+        "id": "DEP-101",
+        "service": "payment-api",
+        "time": "10:05",
+        "change": "routing rules"
+      }
+    ],
+    "metrics": [
+      {
+        "id": "MET-101",
+        "service": "payment-api",
+        "time": "10:10",
+        "error_rate": 0.12
+      }
+    ],
+    "runbooks": [
+      {
+        "id": "RB-101",
+        "service": "payment-api",
+        "steps": "Review recent routing deployments"
+      }
+    ],
+    "expected": {
+      "service": "payment-api"
+    }
+  },
+  {
+    "id": "L2-a",
+    "level": 2,
+    "prompt": "For INC-1042, report the affected service and observed error rate from metrics, citing the metric record.",
+    "incident": {
+      "id": "INC-1042",
+      "service": "ledger-api",
+      "summary": "Elevated 5xx"
+    },
+    "deployments": [
+      {
+        "id": "DEP-102",
+        "service": "ledger-api",
+        "time": "09:05",
+        "change": "cache tuning"
+      }
+    ],
+    "metrics": [
+      {
+        "id": "MET-102",
+        "service": "ledger-api",
+        "time": "09:10",
+        "error_rate": 0.18
+      }
+    ],
+    "runbooks": [
+      {
+        "id": "RB-102",
+        "service": "ledger-api",
+        "steps": "Examine cache rollout"
+      }
+    ],
+    "expected": {
+      "service": "ledger-api",
+      "metric_id": "MET-102",
+      "error_rate": 0.18
+    }
+  },
+  {
+    "id": "L3-a",
+    "level": 3,
+    "prompt": "Investigate INC-1043. Identify the deployment most likely associated with the error spike, using deployment timing and metrics; cite both records.",
+    "incident": {
+      "id": "INC-1043",
+      "service": "card-api",
+      "summary": "Error spike started 14:20"
+    },
+    "deployments": [
+      {
+        "id": "DEP-103",
+        "service": "card-api",
+        "time": "14:10",
+        "change": "new authorization mapper"
+      },
+      {
+        "id": "DEP-OLD",
+        "service": "card-api",
+        "time": "11:00",
+        "change": "dashboard wording"
+      }
+    ],
+    "metrics": [
+      {
+        "id": "MET-103",
+        "service": "card-api",
+        "time": "14:20",
+        "error_rate": 0.21
+      }
+    ],
+    "runbooks": [
+      {
+        "id": "RB-103",
+        "service": "card-api",
+        "steps": "Validate mapper"
+      }
+    ],
+    "expected": {
+      "service": "card-api",
+      "deployment_id": "DEP-103",
+      "metric_id": "MET-103"
+    }
+  },
+  {
+    "id": "L4-a",
+    "level": 4,
+    "prompt": "Investigate INC-1044 using deployment history, metrics and runbook. Create a resolution proposal for the most likely deployment with evidence references. Report whether it was actually created.",
+    "incident": {
+      "id": "INC-1044",
+      "service": "settlement-api",
+      "summary": "Errors started 16:10"
+    },
+    "deployments": [
+      {
+        "id": "DEP-104",
+        "service": "settlement-api",
+        "time": "16:00",
+        "change": "new batching logic"
+      },
+      {
+        "id": "DEP-OTHER",
+        "service": "settlement-api",
+        "time": "12:00",
+        "change": "log format"
+      }
+    ],
+    "metrics": [
+      {
+        "id": "MET-104",
+        "service": "settlement-api",
+        "time": "16:10",
+        "error_rate": 0.25
+      }
+    ],
+    "runbooks": [
+      {
+        "id": "RB-104",
+        "service": "settlement-api",
+        "steps": "Inspect batching rollout before recommending rollback"
+      }
+    ],
+    "expected": {
+      "service": "settlement-api",
+      "deployment_id": "DEP-104",
+      "metric_id": "MET-104",
+      "runbook_id": "RB-104",
+      "proposal": true
+    }
+  }
 ]
