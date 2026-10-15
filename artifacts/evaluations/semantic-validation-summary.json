@@ -1,0 +1,119 @@
+{
+  "judge_model": "claude-sonnet-4-5-20250929",
+  "deepeval_version": "4.2.8",
+  "rubric_version": "lab-grounding-1",
+  "calibration_records": 10,
+  "calibration_reference_assertions": 24,
+  "calibration_disagreements": 0,
+  "calibration_unavailable_labels": 0,
+  "evaluated_records": 18,
+  "completed_semantic_metrics": 42,
+  "evaluator_errors": 0,
+  "default_tests": {
+    "passed": 66,
+    "live_semantic_tests_deselected": 7
+  },
+  "semantic_validation_method": "Live evaluation runner measurements compared with independently supplied calibration labels; live pytest tests were not rerun.",
+  "pilot_results": {
+    "anthropic-json-semantic-sdk-compatible.jsonl": [
+      {
+        "case_id": "L1-a",
+        "state_correct": true,
+        "tool_contract_valid": true,
+        "trajectory_valid": true,
+        "grounding_score": 1.0,
+        "grounding_pass": true,
+        "false_completion": false,
+        "overall_success": true
+      },
+      {
+        "case_id": "L2-a",
+        "state_correct": true,
+        "tool_contract_valid": true,
+        "trajectory_valid": true,
+        "grounding_score": 1.0,
+        "grounding_pass": true,
+        "false_completion": false,
+        "overall_success": true
+      },
+      {
+        "case_id": "L3-a",
+        "state_correct": true,
+        "tool_contract_valid": true,
+        "trajectory_valid": true,
+        "grounding_score": 1.0,
+        "grounding_pass": true,
+        "false_completion": false,
+        "overall_success": true
+      },
+      {
+        "case_id": "L4-a",
+        "state_correct": true,
+        "tool_contract_valid": true,
+        "trajectory_valid": true,
+        "grounding_score": 0.3,
+        "grounding_pass": false,
+        "false_completion": false,
+        "overall_success": false
+      }
+    ],
+    "anthropic-jsonl-semantic-sdk-compatible.jsonl": [
+      {
+        "case_id": "L1-a",
+        "state_correct": true,
+        "tool_contract_valid": true,
+        "trajectory_valid": true,
+        "grounding_score": 1.0,
+        "grounding_pass": true,
+        "false_completion": false,
+        "overall_success": true
+      },
+      {
+        "case_id": "L2-a",
+        "state_correct": true,
+        "tool_contract_valid": true,
+        "trajectory_valid": true,
+        "grounding_score": 1.0,
+        "grounding_pass": true,
+        "false_completion": false,
+        "overall_success": true
+      },
+      {
+        "case_id": "L3-a",
+        "state_correct": true,
+        "tool_contract_valid": true,
+        "trajectory_valid": true,
+        "grounding_score": 1.0,
+        "grounding_pass": true,
+        "false_completion": false,
+        "overall_success": true
+      },
+      {
+        "case_id": "L4-a",
+        "state_correct": true,
+        "tool_contract_valid": true,
+        "trajectory_valid": true,
+        "grounding_score": 0.0,
+        "grounding_pass": false,
+        "false_completion": false,
+        "overall_success": false
+      }
+    ]
+  },
+  "source_sha256": {
+    "artifacts/anthropic.json": "f6f1343a9ac28c1ce5f3f3a94f7de675516eda1bf9842267418d12b53d8bd59f",
+    "artifacts/anthropic.jsonl": "986ed8237feed8a18e0267e0d1fcb3843e538ec63903ae64f707172772171651",
+    "tests/calibration/cases.json": "7b6e34b2b77c6dbd1a7e88ec33f6120b75925d845294ed712af48fe16d24803a"
+  },
+  "limitations": [
+    "Single calibration pass, not a statistical reliability study",
+    "Legacy state reconstructed from tool confirmations",
+    "Full-span step efficiency unavailable"
+  ],
+  "preserved_failed_attempts": [
+    "calibration-semantic.jsonl",
+    "anthropic-json-semantic.jsonl",
+    "anthropic-jsonl-semantic.jsonl"
+  ],
+  "sdk_compatibility_correction": "Removed explicit temperature from the judge adapter; Anthropic SDK 1.13.0 does not accept that keyword. Agent configuration unchanged."
+}

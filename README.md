@@ -1,6 +1,6 @@
 # Lab 5.1 — Tool Selection and Orchestration
 
-A real model-driven agent with deterministic local tools, an independent task evaluator, and inspectable traces.
+A real model-driven agent with deterministic local tools, an independent DeepEval evaluation pipeline, and inspectable traces.
 
 ## Experiment contract
 
@@ -8,9 +8,9 @@ A real model-driven agent with deterministic local tools, an independent task ev
 - **Fixed agent:** one system prompt, one six-tool catalog, one model configuration, same code path.
 - **Pilot:** four hand-authored cases. This is a validation pilot, **not** a statistically useful complexity study.
 - **Next phase:** expand to balanced cases, repeated runs, and held-out cases after pilot validation.
-- **Primary metric:** verified task success, including external state for writes.
+- **Primary metric:** independently verified task outcomes; full success remains unknown until required semantic checks run.
 - **Secondary:** missing tools, write prerequisites, final factual assertions, false completion, tool calls, duration.
-- **Known limits:** final-answer evaluator uses transparent heuristics; trajectory coverage is coarse; scenario fixtures are tiny and all evidence is unambiguous; current write guard checks that required evidence tools were invoked and IDs exist, but not that specific evidence IDs were returned by those invocations or that they support the conclusion. Do not overclaim. `false_completion` currently detects asserted writes only, not all kinds of premature termination.
+- **Known limits:** see [EVALUATION.md](EVALUATION.md) for state reconstruction, semantic calibration, metric choices and unavailable trajectory evidence.
 
 ## Setup
 
@@ -59,3 +59,7 @@ In investigation mode, instrument, reproduce and collect evidence only. Do not e
 ## Design limitations intentionally left for learner assessment
 
 The baseline does not automatically verify semantic evidence support. It does not require a specific decision path, and it has no privileged evaluator inside the agent runtime. Decide whether these are acceptable for the first pilot before making production-grade claims.
+
+## Evaluation framework
+
+The evaluator now uses DeepEval 4.2.8 with deterministic state/contracts and opt-in GEval semantic judgments. Stored runs can be evaluated without rerunning the agent. See [EVALUATION.md](EVALUATION.md) for the architecture, compatibility changes, calibration status and commands.

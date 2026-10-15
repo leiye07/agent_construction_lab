@@ -52,7 +52,7 @@ def execute(case, model_name):
         error = None
     except Exception as exc:
         final, error = '', f'{type(exc).__name__}: {exc}'
-    output = score(case, env, final)
+    output = score(case, env, final, error=error, model=model_name, prompt=SYSTEM)
     output.update({'final':final,'error':error,'elapsed_seconds':round(time.monotonic()-start,3),'model':model_name,'tool_trace':env.calls})
     return output
 

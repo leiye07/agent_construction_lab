@@ -23,12 +23,14 @@ class TestLab(unittest.TestCase):
         e.get_incident('INC-1044'); e.query_metrics('settlement-api'); e.get_deployments('settlement-api'); e.search_runbooks('settlement-api')
         e.create_resolution_proposal('INC-1044','DEP-104',['DEP-104','MET-104','RB-104'])
         good=score(c,e,'settlement-api: DEP-104 associated with MET-104, proposal created')
-        self.assertTrue(good['success'])
+        self.assertIsNone(good['success'])
+        self.assertTrue(good['state_correct'])
         self.assertFalse(good['false_completion'])
         e2=Environment(c)
         bad=score(c,e2,'settlement-api DEP-104 MET-104: proposal created')
         self.assertFalse(bad['success'])
-        self.assertTrue(bad['false_completion'])
+        self.assertIsNone(bad['false_completion'])
+        self.assertFalse(bad['actual_action_completed'])
     def test_external_state_reset(self):
         c=load_cases()[-1]
         a,b=Environment(c),Environment(c)
